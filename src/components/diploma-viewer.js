@@ -10,6 +10,7 @@ import {
 } from "@react-pdf/renderer";
 
 function DiplomaViewer(props) {
+
   const styles = StyleSheet.create({
     container: {
       display: "flex",
@@ -25,22 +26,30 @@ function DiplomaViewer(props) {
     },
     date: {
       position: "absolute",
-      top: props.datePos.x,
-      right: props.datePos.y,
+      textAlign: 'center',
+      top: `${props.datePos.x}%`,
+      left: `${props.datePos.y}%`,
+      right: `100%`,
+      fontSize: props.dateSize,
     },
     course: {
       position: "absolute",
-      top: props.coursePos.x,
-      right: props.coursePos.y,
+      textAlign: 'center',
+      top: `${props.coursePos.x}%`,
+      left: `${props.coursePos.y}%`,
+      right: `100%`,
+      fontSize: props.courseSize,
     },
     name: {
       position: "absolute",
-      top: props.namePos.x,
-      right: props.namePos.y,
-      fontWeight: 600,
-      fontSize: 24,
+      textAlign: 'center',
+      top: `${props.namePos.x}%`,
+      left: `${props.namePos.y}%`,
+      right: `100%`,
+      fontSize: props.nameSize,
     },
   });
+  
   return (
     <Grid item xs={12} md={8}>
       <div style={styles.container}>

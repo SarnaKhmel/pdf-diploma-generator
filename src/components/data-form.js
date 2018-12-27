@@ -26,7 +26,6 @@ const styles = theme => ({
     }
   },
   paper: {
-    marginTop: theme.spacing.unit * 8,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -53,8 +52,8 @@ function DataForm(props) {
     <Grid item xs={12} md={4}>
       <Paper className={classes.paper}>
         <form className={classes.form}>
-          {props.fileURL && (
-            <img className={classes.prevImg} src={props.fileURL} alt="file" />
+          {props.imageURL && (
+            <img className={classes.prevImg} src={props.imageURL} alt="file" />
           )}
           <input
             style={{ display: "none" }}
@@ -87,10 +86,10 @@ function DataForm(props) {
             />
           </FormControl>
           <FormControl style={{flexDirection: "row"}}>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 id="datePos"
-                label="X Position"
+                label="Y Pos %"
                 type="number"
                 className={classes.textField}
                 onChange={(e) => props.handlePosChange(e, "x")}
@@ -100,13 +99,26 @@ function DataForm(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 id="datePos"
-                label="Y Position"
+                label="X Pos %"
                 type="number"
                 onChange={(e) => props.handlePosChange(e, "y")}
                 value={props.datePos.y}
+                className={classes.textField}
+                margin="normal"
+                style={{ marginRight: 10 }}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                id="dateSize"
+                label="Font Size"
+                type="number"
+                onChange={(e) => props.handleInputChange(e)}
+                value={props.dateSize}
                 className={classes.textField}
                 margin="normal"
                 style={{ marginRight: 10 }}
@@ -127,10 +139,10 @@ function DataForm(props) {
             />
           </FormControl>
           <FormControl style={{flexDirection: "row"}}>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 id="coursePos"
-                label="X Position"
+                label="Y Pos %"
                 type="number"
                 className={classes.textField}
                 onChange={(e) => props.handlePosChange(e, "x")}
@@ -140,13 +152,26 @@ function DataForm(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 id="coursePos"
-                label="Y Position"
+                label="X Pos %"
                 type="number"
                 onChange={(e) => props.handlePosChange(e, "y")}
                 value={props.coursePos.y}
+                className={classes.textField}
+                margin="normal"
+                style={{ marginRight: 10 }}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                id="courseSize"
+                label="Font Size"
+                type="number"
+                onChange={(e) => props.handleInputChange(e)}
+                value={props.courseSize}
                 className={classes.textField}
                 margin="normal"
                 style={{ marginRight: 10 }}
@@ -167,10 +192,10 @@ function DataForm(props) {
             />
           </FormControl>
           <FormControl style={{flexDirection: "row"}}>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 id="namePos"
-                label="X Position"
+                label="Y Pos %"
                 type="number"
                 className={classes.textField}
                 onChange={(e) => props.handlePosChange(e, "x")}
@@ -180,13 +205,26 @@ function DataForm(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 id="namePos"
-                label="Y Position"
+                label="X Pos %"
                 type="number"
                 onChange={(e) => props.handlePosChange(e, "y")}
                 value={props.namePos.y}
+                className={classes.textField}
+                margin="normal"
+                style={{ marginRight: 10 }}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                id="nameSize"
+                label="Font Size"
+                type="number"
+                onChange={(e) => props.handleInputChange(e)}
+                value={props.nameSize}
                 className={classes.textField}
                 margin="normal"
                 style={{ marginRight: 10 }}

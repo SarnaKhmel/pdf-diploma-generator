@@ -9,19 +9,22 @@ class App extends Component {
   state = {
     imageURL: "",
     date: "",
+    dateSize: 16,
     datePos: {
       x: 0,
-      y: 0,
+      y: 50,
     },
     course: "",
+    courseSize: 16,
     coursePos: {
-      x: 0,
-      y: 0,
+      x: 10,
+      y: 50,
     },
     name: "",
+    nameSize: 16,
     namePos: {
-      x: 0,
-      y: 0,
+      x: 20,
+      y: 50,
     },
     PDFBlob: "",
   };
@@ -40,8 +43,9 @@ class App extends Component {
 
   handlePosChange = (event, axis) => {
     let newState = this.state;
-    if (event.target.value > 0)
+    if (event.target.value > 0) {
       newState[event.target.id][axis] = event.target.value;
+    }
     this.setState(newState);
   }
 
@@ -65,6 +69,9 @@ class App extends Component {
             namePos={this.state.namePos}
             handlePosChange={this.handlePosChange}
             PDFBlob={this.state.PDFBlob}
+            dateSize={this.state.dateSize}
+            courseSize={this.state.courseSize}
+            nameSize={this.state.nameSize}
           />
           <DiplomaViewer
             background={this.state.imageURL}
@@ -75,6 +82,9 @@ class App extends Component {
             datePos={this.state.datePos}
             namePos={this.state.namePos}
             handlePDFGeneration={this.handlePDFGeneration}
+            dateSize={this.state.dateSize}
+            courseSize={this.state.courseSize}
+            nameSize={this.state.nameSize}
           />
         </Grid>
       </Layout>
