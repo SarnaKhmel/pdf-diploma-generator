@@ -7,7 +7,14 @@ import {
   TextField,
   Input,
   InputLabel,
-  Grid
+  Typography,
+  Grid,
+  List,
+  ListItemText,
+  ListItem,
+  InputAdornment,
+  ListItemSecondaryAction,
+  IconButton
 } from "@material-ui/core";
 
 const styles = theme => ({
@@ -42,6 +49,9 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3
+  },
+  listaTitle: {
+    marginTop: theme.spacing.unit * 3
   }
 });
 
@@ -51,7 +61,7 @@ function DataForm(props) {
   return (
     <Grid item xs={12} md={4}>
       <Paper className={classes.paper}>
-        <form className={classes.form}>
+        <div className={classes.form}>
           {props.imageURL && (
             <img className={classes.prevImg} src={props.imageURL} alt="file" />
           )}
@@ -72,6 +82,7 @@ function DataForm(props) {
               Upload diploma PNG
             </Button>
           </label>
+          <hr/>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="date">Fecha</InputLabel>
             <Input
@@ -85,14 +96,14 @@ function DataForm(props) {
               autoFocus
             />
           </FormControl>
-          <FormControl style={{flexDirection: "row"}}>
+          <FormControl style={{ flexDirection: "row" }}>
             <Grid item xs={4}>
               <TextField
                 id="datePos"
                 label="Y Pos %"
                 type="number"
                 className={classes.textField}
-                onChange={(e) => props.handlePosChange(e, "x")}
+                onChange={e => props.handlePosChange(e, "x")}
                 value={props.datePos.x}
                 margin="normal"
                 style={{ marginRight: 10 }}
@@ -104,7 +115,7 @@ function DataForm(props) {
                 id="datePos"
                 label="X Pos %"
                 type="number"
-                onChange={(e) => props.handlePosChange(e, "y")}
+                onChange={e => props.handlePosChange(e, "y")}
                 value={props.datePos.y}
                 className={classes.textField}
                 margin="normal"
@@ -117,7 +128,7 @@ function DataForm(props) {
                 id="dateSize"
                 label="Font Size"
                 type="number"
-                onChange={(e) => props.handleInputChange(e)}
+                onChange={e => props.handleInputChange(e)}
                 value={props.dateSize}
                 className={classes.textField}
                 margin="normal"
@@ -138,14 +149,14 @@ function DataForm(props) {
               }}
             />
           </FormControl>
-          <FormControl style={{flexDirection: "row"}}>
+          <FormControl style={{ flexDirection: "row" }}>
             <Grid item xs={4}>
               <TextField
                 id="coursePos"
                 label="Y Pos %"
                 type="number"
                 className={classes.textField}
-                onChange={(e) => props.handlePosChange(e, "x")}
+                onChange={e => props.handlePosChange(e, "x")}
                 value={props.coursePos.x}
                 margin="normal"
                 style={{ marginRight: 10 }}
@@ -157,7 +168,7 @@ function DataForm(props) {
                 id="coursePos"
                 label="X Pos %"
                 type="number"
-                onChange={(e) => props.handlePosChange(e, "y")}
+                onChange={e => props.handlePosChange(e, "y")}
                 value={props.coursePos.y}
                 className={classes.textField}
                 margin="normal"
@@ -170,7 +181,7 @@ function DataForm(props) {
                 id="courseSize"
                 label="Font Size"
                 type="number"
-                onChange={(e) => props.handleInputChange(e)}
+                onChange={e => props.handleInputChange(e)}
                 value={props.courseSize}
                 className={classes.textField}
                 margin="normal"
@@ -180,25 +191,16 @@ function DataForm(props) {
             </Grid>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="name">Nombre del egresado</InputLabel>
-            <Input
-              name="name"
-              type="text"
-              id="name"
-              value={props.course}
-              onChange={e => {
-                props.handleInputChange(e);
-              }}
-            />
+            <Typography>Name placeholder</Typography>
           </FormControl>
-          <FormControl style={{flexDirection: "row"}}>
+          <FormControl style={{ flexDirection: "row" }}>
             <Grid item xs={4}>
               <TextField
                 id="namePos"
                 label="Y Pos %"
                 type="number"
                 className={classes.textField}
-                onChange={(e) => props.handlePosChange(e, "x")}
+                onChange={e => props.handlePosChange(e, "x")}
                 value={props.namePos.x}
                 margin="normal"
                 style={{ marginRight: 10 }}
@@ -210,7 +212,7 @@ function DataForm(props) {
                 id="namePos"
                 label="X Pos %"
                 type="number"
-                onChange={(e) => props.handlePosChange(e, "y")}
+                onChange={e => props.handlePosChange(e, "y")}
                 value={props.namePos.y}
                 className={classes.textField}
                 margin="normal"
@@ -223,7 +225,7 @@ function DataForm(props) {
                 id="nameSize"
                 label="Font Size"
                 type="number"
-                onChange={(e) => props.handleInputChange(e)}
+                onChange={e => props.handleInputChange(e)}
                 value={props.nameSize}
                 className={classes.textField}
                 margin="normal"
@@ -232,6 +234,46 @@ function DataForm(props) {
               />
             </Grid>
           </FormControl>
+          <hr/>
+          <Typography className={classes.listaTitle} variant="title">
+            Lista de egresados
+          </Typography>
+          <FormControl margin="normal" required fullWidth>
+            <form style={{ display:"contents" }} onSubmit={props.handleAddName}>
+            <InputLabel>Nombre del egresado</InputLabel>
+              <Input
+                id="nameToAdd"
+                type='text'
+                value={props.nameToAdd}
+                onChange={e => {
+                  props.handleInputChange(e);
+                }}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <Button onClick={props.handleAddName} variant="text" size="small" color="primary">
+                      Añadir
+                    </Button>
+                  </InputAdornment>
+                }
+              />
+            </form>
+          </FormControl>
+          <List dense>
+          {
+            props.names.map((name, id) =>  
+            <ListItem key={id}>
+              <ListItemText
+                primary={name}
+              />
+              <ListItemSecondaryAction>
+                <IconButton onClick={() => {props.handleDeleteName(id)}} aria-label="Delete">
+                  x
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            )
+          }
+          </List>
           <Button
             type="submit"
             fullWidth
@@ -243,9 +285,9 @@ function DataForm(props) {
             download
             component="a"
           >
-            Generar
+            Generar PDF
           </Button>
-        </form>
+        </div>
       </Paper>
     </Grid>
   );
