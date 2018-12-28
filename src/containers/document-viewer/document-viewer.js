@@ -1,17 +1,18 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import MainDocument from "./main-document";
+import MainDocument from "./components/main-document";
 import { StyleSheet, PDFViewer } from "@react-pdf/renderer";
 
 function DocumentViewer(props) {
   const styles = StyleSheet.create({
     container: {
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
+      height: "100%"
     },
     viewer: {
       width: "100%",
-      height: 700
+      height: "100%"
     },
   });
 

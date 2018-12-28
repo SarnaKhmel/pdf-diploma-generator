@@ -1,0 +1,1 @@
+export const FONTS_API_KEY = "AIzaSyCFvrjFGiVZfZW0Pw3MB6dreV8g-nxQCEQ"

@@ -3,17 +3,13 @@ import { Document, Page } from "@react-pdf/renderer";
 import Diploma from "./diploma";
 
 function MainDocument(props) {
-  let Dip = [];
-
-  for (let i = 0; i < props.names.length; i++) {
-    Dip.push(<Diploma key={i} {...props} name={props.names[i]} />);
-  }
-
   return (
     <Document onRender={props.handlePDFGeneration}>
-      {props.names.length > 0 ? (
+      {props.nameList.names.length > 0 ? (
         <Page size="A4" orientation="landscape">
-          {Dip}
+          {props.nameList.names.map((name, id) => 
+            <Diploma key={id} {...props} name={{ ...props.name, value: name }} />
+          )}
         </Page>
       ) : (
         <Page size="A4" orientation="landscape">

@@ -8,26 +8,26 @@ function Diploma(props) {
     date: {
       position: "absolute",
       textAlign: "center",
-      top: `${props.datePos.x}%`,
-      left: `${props.datePos.y}%`,
+      top: `${props.date.pos.x}%`,
+      left: `${props.date.pos.y}%`,
       right: `100%`,
-      fontSize: props.dateSize
+      fontSize: props.date.size !== 0 ? props.date.size : 1
     },
     course: {
       position: "absolute",
       textAlign: "center",
-      top: `${props.coursePos.x}%`,
-      left: `${props.coursePos.y}%`,
+      top: `${props.course.pos.x}%`,
+      left: `${props.course.pos.y}%`,
       right: `100%`,
-      fontSize: props.courseSize
+      fontSize: props.course.size !== 0 ? props.course.size : 1
     },
     name: {
       position: "absolute",
       textAlign: "center",
-      top: `${props.namePos.x}%`,
-      left: `${props.namePos.y}%`,
+      top: `${props.name.pos.x}%`,
+      left: `${props.name.pos.y}%`,
       right: `100%`,
-      fontSize: props.nameSize
+      fontSize: props.name.size !== 0 ? props.name.size : 1
     }
   });
 
@@ -35,13 +35,13 @@ function Diploma(props) {
     <View>
       <Image src={props.background} />
       <Text style={styles.date} break>
-        {props.date}
+        {props.date.value}
       </Text>
       <Text style={styles.course} break>
-        {props.course}
+        {props.course.value}
       </Text>
       <Text style={styles.name} break>
-        {props.name}
+        {props.name.value}
       </Text>
     </View>
   );
