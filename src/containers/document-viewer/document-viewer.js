@@ -6,8 +6,6 @@ import { StyleSheet, PDFViewer } from "@react-pdf/renderer";
 function DocumentViewer(props) {
   const styles = StyleSheet.create({
     container: {
-      display: "flex",
-      justifyContent: "center",
       height: "100%"
     },
     viewer: {
@@ -18,11 +16,9 @@ function DocumentViewer(props) {
 
   return (
     <Grid item xs={12} md={8}>
-      <div style={styles.container}>
         <PDFViewer style={styles.viewer}>
           <MainDocument {...props} />
         </PDFViewer>
-      </div>
     </Grid>
   );
 }

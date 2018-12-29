@@ -74,7 +74,7 @@ function PDFTextField(props) {
       </FormControl>
       {props.data.fontFamily && (
         <FormControl style={{ flexDirection: "row" }} fullWidth>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <TextField
               id={props.id}
               name="size"
@@ -88,29 +88,42 @@ function PDFTextField(props) {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6} style={{ paddingRight: 10 }}>
+          <Grid item xs={5} style={{ paddingRight: 10 }}>
             <TextField
               select
               id={props.id}
               name="weight"
               label="Font Weight"
-              defaultValue="First select font family"
               onChange={e => {
                 e.target.id = props.id;
                 props.handleInputChange(e);
               }}
-              value={props.data.weight}
+              value={props.data.weight ? props.data.weight : "regular"}
               className={classes.textField}
               margin="normal"
               style={{ width: "100%" }}
               variant="outlined"
             >
-              {Object.keys(props.data.fontFamily.files).map((key, id) => (
+              {props.data.fontFamily.variants.map((key, id) => (
                 <MenuItem key={id} value={key}>
                   {key}
                 </MenuItem>
               ))}
             </TextField>
+          </Grid>
+          <Grid item xs={3} style={{ paddingRight: 10 }}>
+            <TextField
+              id={props.id}
+              name="color"
+              label="Color"
+              type="color"
+              onChange={e => props.handleInputChange(e)}
+              value={props.data.color}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+              style={{ width: "100%" }}
+            />
           </Grid>
         </FormControl>
       )}

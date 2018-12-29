@@ -8,7 +8,11 @@ import { FONTS_API_KEY } from "./config/index";
 
 class App extends Component {
   state = {
-    imageURL: "",
+    background: {
+      url: "",
+      height: 100,
+      width: 100,
+    },
     date: {
       value: "",
       size: 16,
@@ -17,7 +21,9 @@ class App extends Component {
         y: 50
       },
       fontCategory: null,
-      fontFamily: null
+      fontFamily: null,
+      weight: "",
+      color: "#000000"
     },
     course: {
       value: "",
@@ -27,7 +33,9 @@ class App extends Component {
         y: 50
       },
       fontCategory: null,
-      fontFamily: null
+      fontFamily: null,
+      weight: "",
+      color: "#000000"
     },
     name: {
       value: "",
@@ -37,7 +45,9 @@ class App extends Component {
         y: 50
       },
       fontCategory: null,
-      fontFamily: null
+      fontFamily: null,
+      weight: "",
+      color: "#000000"
     },
     nameList: {
       nameToAdd: "",
@@ -79,21 +89,41 @@ class App extends Component {
       label: font.family,
       category: font.category,
       files: font.files,
+      variants: font.variants,
     }));
     fonts.length = 100;
+    fonts.forEach(font => {
+      let found = false;
+      for(let i = 0; i < font.variants.length; i++) {
+        if(font.variants[i] === "regular"){
+          found = true;
+        }
+      }
+      if (!found) {
+        font.files.regular = font.files[font.variants[0]]
+        delete font.files[font.variants[0]]
+        font.variants[0] = "regular"
+      }
+    })
     this.setState({ fonts });
   }
 
   handleChargeFile = event => {
     this.setState({
-      imageURL: URL.createObjectURL(event.target.files[0])
+      background: {
+        ...this.state.background,
+        url: URL.createObjectURL(event.target.files[0])
+      }
     });
   };
 
   handleInputChange = event => {
-    let newState = this.state;
-    newState[event.target.id][event.target.name] = event.target.value;
-    this.setState(newState);
+    this.setState({
+      [event.target.id]: {
+        ...this.state[event.target.id],
+        [event.target.name]: event.target.value
+      }
+    });
   };
 
   handleAutoCompleteChange = (id, name) => value => {
@@ -148,8 +178,10 @@ class App extends Component {
             course={this.state.course}
             name={this.state.name}
             nameList={this.state.nameList}
-            imageURL={this.state.imageURL}
+            background={this.state.background}
             PDFBlob={this.state.PDFBlob}
+            backgroundWidth={this.state.imageWidth}
+            backgroundHeight={this.state.imageHeight}
             // Handlers
             handleChargeFile={this.handleChargeFile}
             handleInputChange={this.handleInputChange}
@@ -167,7 +199,7 @@ class App extends Component {
             course={this.state.course}
             name={this.state.name}
             nameList={this.state.nameList}
-            background={this.state.imageURL}
+            background={this.state.background}
             // Handlers
             handlePDFGeneration={this.handlePDFGeneration}
             handleAddBlobToDownload={this.handleAddBlobToDownload}

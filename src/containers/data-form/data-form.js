@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AddPhotoIcon from "@material-ui/icons/AddPhotoAlternate";
 import DoneIcon from "@material-ui/icons/Done";
@@ -17,6 +17,7 @@ import {
   ListItemText,
   ListItem,
   InputAdornment,
+  TextField,
   ListItemSecondaryAction,
   IconButton
 } from "@material-ui/core";
@@ -72,8 +73,41 @@ function DataForm(props) {
           <Typography color="primary" style={{ marginBottom: 8 }} variant="h6">
             Diploma
           </Typography>
-          {props.imageURL && (
-            <img className={classes.prevImg} src={props.imageURL} alt="file" />
+          {props.background.url && (
+            <Fragment>
+              <img className={classes.prevImg} src={props.background.url} alt="file" />
+              <FormControl style={{ flexDirection: "row" }}>
+                <Grid item xs={6}>
+                  <TextField
+                    id="background"
+                    name="width"
+                    label="Width %"
+                    type="number"
+                    className={classes.textField}
+                    onChange={e => props.handleInputChange(e)}
+                    value={props.background.width}
+                    margin="normal"
+                    style={{ marginRight: 10 }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    id="background"
+                    name="height"
+                    label="Height %"
+                    type="number"
+                    onChange={e => props.handleInputChange(e)}
+                    value={props.background.height}
+                    className={classes.textField}
+                    margin="normal"
+                    style={{ marginRight: 10 }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </FormControl>
+              <Typography variant="caption">First adjust width to prevent errors :)</Typography>
+            </Fragment>
           )}
           <input
             style={{ display: "none" }}
@@ -195,3 +229,4 @@ function DataForm(props) {
 }
 
 export default withStyles(styles)(DataForm);
+  
