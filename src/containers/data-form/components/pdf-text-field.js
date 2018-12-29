@@ -1,6 +1,14 @@
 import React, { Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, FormControl, Input, InputLabel, Grid, TextField } from "@material-ui/core/";
+import {
+  Typography,
+  FormControl,
+  Input,
+  InputLabel,
+  Grid,
+  TextField,
+  MenuItem
+} from "@material-ui/core/";
 import AutoComplete from "../../autocomplete/autocomplete";
 
 const styles = theme => ({
@@ -40,40 +48,74 @@ function PDFTextField(props) {
       <FormControl margin="normal" required fullWidth>
         <Typography>Font</Typography>
       </FormControl>
-      <FormControl style={{ flexDirection: "row" }} fullWidth>
+      <FormControl fullWidth>
         <AutoComplete
           id={props.id}
           suggestions={props.categories}
           value={props.data.fontCategory}
           placeholder="Category"
-          handleAutoCompleteChange={() => props.handleAutoCompleteChange(props.id, "fontCategory")}
+          handleAutoCompleteChange={() =>
+            props.handleAutoCompleteChange(props.id, "fontCategory")
+          }
         />
-        <AutoComplete
-          id={props.id}
-          name="fontFamily"
-          suggestions={props.fonts}
-          value={props.data.fontFamily}
-          filter={props.data.fontCategory && props.data.fontCategory.value}
-          placeholder="Family"
-          handleAutoCompleteChange={() => props.handleAutoCompleteChange(props.id, "fontFamily")}
-        />
-      </FormControl>
-      <FormControl style={{ flexDirection: "row" }}>
-        <Grid item xs={4}>
-          <TextField
+        {props.data.fontCategory && (
+          <AutoComplete
             id={props.id}
-            name="pos"
-            label="Y Pos %"
-            type="number"
-            className={classes.textField}
-            onChange={e => props.handlePosChange(e, "x")}
-            value={props.data.pos.x}
-            margin="normal"
-            style={{ marginRight: 10 }}
-            variant="outlined"
+            name="fontFamily"
+            suggestions={props.fonts}
+            value={props.data.fontFamily}
+            filter={props.data.fontCategory && props.data.fontCategory.value}
+            placeholder="Family"
+            handleAutoCompleteChange={() =>
+              props.handleAutoCompleteChange(props.id, "fontFamily")
+            }
           />
-        </Grid>
-        <Grid item xs={4}>
+        )}
+      </FormControl>
+      {props.data.fontFamily && (
+        <FormControl style={{ flexDirection: "row" }} fullWidth>
+          <Grid item xs={6}>
+            <TextField
+              id={props.id}
+              name="size"
+              label="Font Size"
+              type="number"
+              onChange={e => props.handleInputChange(e)}
+              value={props.data.size}
+              className={classes.textField}
+              margin="normal"
+              style={{ marginRight: 10 }}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6} style={{ paddingRight: 10 }}>
+            <TextField
+              select
+              id={props.id}
+              name="weight"
+              label="Font Weight"
+              defaultValue="First select font family"
+              onChange={e => {
+                e.target.id = props.id;
+                props.handleInputChange(e);
+              }}
+              value={props.data.weight}
+              className={classes.textField}
+              margin="normal"
+              style={{ width: "100%" }}
+              variant="outlined"
+            >
+              {Object.keys(props.data.fontFamily.files).map((key, id) => (
+                <MenuItem key={id} value={key}>
+                  {key}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+        </FormControl>
+      )}
+      <FormControl style={{ flexDirection: "row" }}>
+        <Grid item xs={6}>
           <TextField
             id={props.id}
             name="pos"
@@ -87,15 +129,15 @@ function PDFTextField(props) {
             variant="outlined"
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
             id={props.id}
-            name="size"
-            label="Font Size"
+            name="pos"
+            label="Y Pos %"
             type="number"
-            onChange={e => props.handleInputChange(e)}
-            value={props.data.size}
             className={classes.textField}
+            onChange={e => props.handlePosChange(e, "x")}
+            value={props.data.pos.x}
             margin="normal"
             style={{ marginRight: 10 }}
             variant="outlined"

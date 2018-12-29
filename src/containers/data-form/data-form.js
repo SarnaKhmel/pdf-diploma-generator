@@ -9,7 +9,6 @@ import {
   Button,
   Paper,
   FormControl,
-  TextField,
   Input,
   InputLabel,
   Typography,
@@ -70,7 +69,7 @@ function DataForm(props) {
     <Grid item xs={12} md={4}>
       <Paper className={classes.paper}>
         <div className={classes.form}>
-          <Typography color="primary" style={{ marginBottom: 8 }} variant="title">
+          <Typography color="primary" style={{ marginBottom: 8 }} variant="h6">
             Diploma
           </Typography>
           {props.imageURL && (
@@ -95,7 +94,7 @@ function DataForm(props) {
               <AddPhotoIcon style={{ marginLeft: 5 }} />
             </Button>
           </label>
-          <Typography color="primary" className={classes.listaTitle} variant="title">
+          <Typography color="primary" className={classes.listaTitle} variant="h6">
             Inputs
           </Typography>
           <PDFTextField
@@ -131,7 +130,7 @@ function DataForm(props) {
             handlePosChange={props.handlePosChange}
             handleAutoCompleteChange={props.handleAutoCompleteChange}
           />
-          <Typography color="primary" className={classes.listaTitle} variant="title">
+          <Typography color="primary" className={classes.listaTitle} variant="h6">
             Lista de egresados
           </Typography>
           <FormControl margin="normal" required fullWidth>

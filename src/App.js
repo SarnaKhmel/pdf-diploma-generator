@@ -14,7 +14,7 @@ class App extends Component {
       size: 16,
       pos: {
         x: 0,
-        y: 50,
+        y: 50
       },
       fontCategory: null,
       fontFamily: null
@@ -24,25 +24,25 @@ class App extends Component {
       size: 16,
       pos: {
         x: 10,
-        y: 50,
+        y: 50
       },
       fontCategory: null,
       fontFamily: null
     },
-    name:{
+    name: {
       value: "",
       size: 16,
       pos: {
-        x: 10,
-        y: 50,
+        x: 20,
+        y: 50
       },
       fontCategory: null,
       fontFamily: null
     },
     nameList: {
       nameToAdd: "",
-      names: [],
-    } ,
+      names: []
+    },
     PDFBlob: "",
     fonts: [],
     categories: [
@@ -66,7 +66,7 @@ class App extends Component {
         value: "monospace",
         label: "Monospace"
       }
-    ],
+    ]
   };
 
   async componentDidMount() {
@@ -78,9 +78,9 @@ class App extends Component {
       value: font.family,
       label: font.family,
       category: font.category,
-      files: font.files
+      files: font.files,
     }));
-    fonts.length = 100
+    fonts.length = 100;
     this.setState({ fonts });
   }
 
@@ -97,11 +97,11 @@ class App extends Component {
   };
 
   handleAutoCompleteChange = (id, name) => value => {
-    console.log(name, id)
     this.setState({
       [id]: {
         ...this.state[id],
-        [name]: value
+        [name]: value,
+        weight: ""
       }
     });
   };
@@ -115,7 +115,6 @@ class App extends Component {
   };
 
   handlePDFGeneration = PDFBlob => {
-    console.log(PDFBlob.blob);
     this.setState({
       PDFBlob: URL.createObjectURL(PDFBlob.blob)
     });
@@ -127,7 +126,7 @@ class App extends Component {
       this.setState({
         nameList: {
           names: [...this.state.nameList.names, this.state.nameList.nameToAdd],
-          nameToAdd: "",
+          nameToAdd: ""
         }
       });
     }
@@ -135,8 +134,7 @@ class App extends Component {
 
   handleDeleteName = id => {
     let newState = this.state;
-    newState.names.splice(id, 1);
-    console.log(newState.names);
+    newState.nameList.names.splice(id, 1);
     this.setState(newState);
   };
 
@@ -152,7 +150,6 @@ class App extends Component {
             nameList={this.state.nameList}
             imageURL={this.state.imageURL}
             PDFBlob={this.state.PDFBlob}
-
             // Handlers
             handleChargeFile={this.handleChargeFile}
             handleInputChange={this.handleInputChange}
@@ -160,7 +157,6 @@ class App extends Component {
             handlePosChange={this.handlePosChange}
             handleDeleteName={this.handleDeleteName}
             handleAutoCompleteChange={this.handleAutoCompleteChange}
-
             // Fonts
             fonts={this.state.fonts}
             categories={this.state.categories}
@@ -172,7 +168,6 @@ class App extends Component {
             name={this.state.name}
             nameList={this.state.nameList}
             background={this.state.imageURL}
-            
             // Handlers
             handlePDFGeneration={this.handlePDFGeneration}
             handleAddBlobToDownload={this.handleAddBlobToDownload}
