@@ -1,3 +1,11 @@
+# PDF Diploma Generator with React JS and Google Fonts API
+
+This is a reactive web tool to create customized diplomas for a list of users or attendants to events or courses, you can add date, list of names and course name
+
+## Application preview
+
+![App screenshot](./.readme-static/screenshot.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
