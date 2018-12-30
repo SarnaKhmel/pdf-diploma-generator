@@ -11,19 +11,19 @@ class Diploma extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.date.fontFamily !== this.props.date.fontFamily 
       || prevProps.date.weight !== this.props.date.weight) {
-      Font.register(this.props.date.fontFamily.files[this.props.date.weight ? this.props.date.weight : "regular"], {
+      Font.register(this.props.date.fontFamily.files[this.props.date.weight ? this.props.date.weight : "regular"].replace('http:', 'https:'), {
         family: this.props.date.fontFamily.value + this.props.date.weight
       });
     }
     if (prevProps.course.fontFamily !== this.props.course.fontFamily 
       || prevProps.course.weight !== this.props.course.weight) {
-      Font.register(this.props.course.fontFamily.files[this.props.course.weight ? this.props.course.weight : "regular"], {
+      Font.register(this.props.course.fontFamily.files[this.props.course.weight ? this.props.course.weight : "regular"].replace('http:', 'https:'), {
         family: this.props.course.fontFamily.value + this.props.course.weight
       });
     }
     if (prevProps.name.fontFamily !== this.props.name.fontFamily 
       || prevProps.name.weight !== this.props.name.weight) {
-      Font.register(this.props.name.fontFamily.files[this.props.name.weight ? this.props.name.weight : "regular"], {
+      Font.register(this.props.name.fontFamily.files[this.props.name.weight ? this.props.name.weight : "regular"].replace('http:', 'https:'), {
         family: this.props.name.fontFamily.value + this.props.name.weight
       });
     }
