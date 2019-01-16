@@ -1,17 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Image,
   Text,
   StyleSheet,
-  Font,
-  Page
+  Font
 } from "@react-pdf/renderer";
 
 class Diploma extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.date.fontFamily !== this.props.date.fontFamily 
       || prevProps.date.weight !== this.props.date.weight) {
-      Font.register(this.props.date.fontFamily.files[this.props.date.weight ? this.props.date.weight : "regular"].replace('http:', 'https:'), {
+        Font.register(this.props.date.fontFamily.files[this.props.date.weight ? this.props.date.weight : "regular"].replace('http:', 'https:'), {
         family: this.props.date.fontFamily.value + this.props.date.weight
       });
     }
@@ -77,7 +76,7 @@ class Diploma extends Component {
     });
 
     return (
-      <Page size="A4" orientation="landscape">
+      <Fragment>
         <Image style={styles.background} src={this.props.background.url} />
         <Text style={styles.date} break>
           {this.props.date.value}
@@ -88,7 +87,7 @@ class Diploma extends Component {
         <Text style={styles.name} break>
           {this.props.name.value}
         </Text>
-      </Page>
+      </Fragment>
     );
   }
 }

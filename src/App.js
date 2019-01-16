@@ -92,6 +92,24 @@ class App extends Component {
       variants: font.variants,
     }));
     fonts.length = 100;
+    fonts.push({
+      value: "GT America Medium",
+      label: "GT America Medium",
+      category: "sans-serif",
+      files: {
+        "regular": "https://s3.us-east-2.amazonaws.com/blockdemy-diploma/GT-America-Medium.ttf"
+      },
+      variants: ["regular"]
+    })
+    fonts.push({
+      value: "Uniform Bold",
+      label: "Uniform Bold",
+      category: "sans-serif",
+      files: {
+        "regular": "https://s3.us-east-2.amazonaws.com/blockdemy-diploma/Uniform_Bold.ttf"
+      },
+      variants: ["regular"]
+    })
     fonts.forEach(font => {
       let found = false;
       for(let i = 0; i < font.variants.length; i++) {
